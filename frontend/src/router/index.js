@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '@/pages/LoginPage.vue'
-import HomePage from '@/pages/HomePage.vue'
+import BookPage from '@/pages/BookPage.vue'
 import DummyPage from '@/pages/DummyPage.vue'
 import { useAuthStore } from '@/stores/auth'
 
@@ -14,10 +14,10 @@ const router = createRouter({
       component: LoginPage
     },
     {
-      // ホーム画面
-      path: '/',
-      name: 'home',
-      component: HomePage,
+      // 書籍画面
+      path: '/book',
+      name: 'book',
+      component: BookPage,
       meta: { requiresAuth: true } // 要ログイン
     },
     {
@@ -30,7 +30,7 @@ const router = createRouter({
     {
       // 想定外のパスをリダイレクト
       path: '/:pathMatch(.*)*',
-      redirect: '/'
+      redirect: '/book'
     }
   ]
 })

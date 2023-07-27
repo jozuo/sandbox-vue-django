@@ -15,15 +15,12 @@ const route = useRoute()
 const router = useRouter()
 
 const login = async () => {
-  console.log('call login')
-  // メッセージクリア
   messageStore.clear()
 
-  // ログイン
   try {
     await authStore.login(username.value, password.value)
     messageStore.setInfoMessage('ログインしました。')
-    // ホーム画面に遷移
+
     const next = route.query.next || '/'
     router.replace(next)
   } catch (e) {

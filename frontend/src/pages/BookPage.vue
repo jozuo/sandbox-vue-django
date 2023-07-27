@@ -62,11 +62,17 @@ const initialize = async () => {
   }
 }
 
+const newItem = () => {
+  messageStore.clear()
+}
+
 const editItem = (item) => {
+  messageStore.clear()
   editedItem.value = Object.assign({}, item)
   dialog.value = true
 }
 const deleteItem = (item) => {
+  messageStore.clear()
   editedItem.value = Object.assign({}, item)
   dialogDelete.value = true
 }
@@ -136,7 +142,9 @@ initialize()
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ props }">
-                <v-btn color="primary" dark class="mb-2" v-bind="props"> 新規追加 </v-btn>
+                <v-btn color="primary" dark class="mb-2" v-bind="props" @click="newItem">
+                  新規追加
+                </v-btn>
               </template>
               <v-card>
                 <v-card-title>
