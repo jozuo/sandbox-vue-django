@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # application
     "apiv1.apps.Apiv1Config",
     "shop.apps.ShopConfig",
+    "accounts.apps.AccountsConfig",
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,9 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# カスタムユーザー
+AUTH_USER_MODEL = "accounts.User"
+
 # DRF
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -154,6 +158,8 @@ if settings.DEBUG == True:
 # dj-rest-auth
 REST_AUTH = {
     "USE_JWT": True,
+    "LOGIN_SERIALIZER": "accounts.serializers.LoginSerializer",
+    "USER_DETAILS_SERIALIZER": "accounts.serializers.UserDetailsSerializer",
 }
 
 # django-rest-framework-simplejwt
