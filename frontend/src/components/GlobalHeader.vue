@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router'
 import { VListItemTitle } from 'vuetify/lib/components/index.mjs'
 
 const authStore = useAuthStore()
-const { username, isLoggedIn } = storeToRefs(authStore)
+const { nickname, isLoggedIn } = storeToRefs(authStore)
 
 const messageStore = useMessageStore()
 const router = useRouter()
@@ -32,7 +32,7 @@ const logout = () => {
     <template v-slot:append v-if="$route.meta.requiresAuth">
       <!-- 条件分岐 -->
       <v-btn v-if="isLoggedIn">
-        {{ username }}
+        {{ nickname }}
         <v-menu activator="parent">
           <v-list>
             <v-list-item>

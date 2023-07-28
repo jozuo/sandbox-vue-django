@@ -8,7 +8,7 @@ import { useRoute, useRouter } from 'vue-router'
 const messageStore = useMessageStore()
 const authStore = useAuthStore()
 
-const username = ref('')
+const email = ref('')
 const password = ref('')
 
 const route = useRoute()
@@ -18,7 +18,7 @@ const login = async () => {
   messageStore.clear()
 
   try {
-    await authStore.login(username.value, password.value)
+    await authStore.login(email.value, password.value)
     messageStore.setInfoMessage('ログインしました。')
 
     const next = route.query.next || '/'
@@ -36,7 +36,7 @@ const login = async () => {
         <v-card-title class="mb-8">ログイン</v-card-title>
         <v-card-text>
           <v-form>
-            <v-text-field v-model="username" label="ユーザー名" required></v-text-field>
+            <v-text-field v-model="email" label="メールアドレス" required></v-text-field>
 
             <v-text-field
               v-model="password"

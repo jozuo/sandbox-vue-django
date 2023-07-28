@@ -3,15 +3,15 @@ import { ref } from 'vue'
 import api, { STORAGE_KEY_ACCESS_TOKEN } from '../services/api'
 
 export const useAuthStore = defineStore('auth', () => {
-  const username = ref('')
+  const nickname = ref('')
   const isLoggedIn = ref(false)
 
   /**
    * ログイン
    */
-  const login = async (_username, _password) => {
+  const login = async (_email, _password) => {
     const response = await api.post('/auth/login/', {
-      username: _username,
+      email: _email,
       password: _password
     })
 
@@ -19,7 +19,7 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.setItem(STORAGE_KEY_ACCESS_TOKEN, response.data.access)
 
     // ステートの更新
-    username.value = response.data.user.username
+    nickname.value = response.data.user.nickname
     isLoggedIn.value = true
   }
 
@@ -31,7 +31,7 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.removeItem(STORAGE_KEY_ACCESS_TOKEN)
 
     // ステートの更新
-    username.value = ''
+    nickname.value = ''
     isLoggedIn.value = false
   }
 
@@ -40,9 +40,9 @@ export const useAuthStore = defineStore('auth', () => {
    */
   const renew = async () => {
     const response = await api('/auth/user/')
-    username.value = response.data.username
+    nickname.value = response.data.username
     isLoggedIn.value = true
   }
 
-  return { username, isLoggedIn, login, logout, renew }
+  return { nickname, isLoggedIn, login, logout, renew }
 })
