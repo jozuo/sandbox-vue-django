@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from django.conf import settings
 from pathlib import Path
 from datetime import timedelta
 
@@ -139,7 +140,16 @@ REST_FRAMEWORK = {
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
 }
+
+## BrowswerAPIを本番環境では無効化
+if settings.DEBUG == True:
+    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"].append(
+        "rest_framework.renderers.BrowsableAPIRenderer"
+    )
 
 # dj-rest-auth
 REST_AUTH = {
