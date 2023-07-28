@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "dj_rest_auth",
     "corsheaders",
+    "drf_spectacular",
     # application
     "apiv1.apps.Apiv1Config",
     "shop.apps.ShopConfig",
@@ -136,7 +137,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
-    ]
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # dj-rest-auth
